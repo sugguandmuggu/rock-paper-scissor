@@ -1,54 +1,98 @@
-function getComputerChoice(){
-    let num= (Math.floor(Math.random()*100))%3;
-    
-    if(num === 0){
+function getComputerChoice() {
+    let num = (Math.floor(Math.random() * 100)) % 3;
+
+    if (num === 0) {
         return "rock";
     }
-    else if(num ===1){
+    else if (num === 1) {
         return "paper";
     }
-    else{
+    else {
         return "scissor";
     }
 }
 
-function playRound(playerSelection, computerSelection){
-    
+function playRound(playerSelection, computerSelection) {
+
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
 
-    if(playerSelection === computerSelection){
-        return "It's a draw. We'll get em next time!";
+    if (playerSelection === computerSelection) {
+        return 2;
     }
 
-    else if(playerSelection === "rock" && computerSelection === "scissor"){
-        return "You Win! Rock beats Scissor"; 
+    else if (playerSelection === "rock" && computerSelection === "scissor") {
+        return 0;
     }
 
-    else if(playerSelection === "rock" && computerSelection === "paper"){
-        return "You Lose! Paper beats Rock"; 
+    else if (playerSelection === "rock" && computerSelection === "paper") {
+        return 1;
     }
 
-    else if(playerSelection === "paper" && computerSelection === "scissor"){
-        return "You Lose! Scissor beats Paper"; 
+    else if (playerSelection === "paper" && computerSelection === "scissor") {
+        return 1;
     }
 
-    else if(playerSelection === "paper" && computerSelection === "rock"){
-        return "You Win! Paper beats Rock"; 
+    else if (playerSelection === "paper" && computerSelection === "rock") {
+        return 0;
     }
 
-    else if(playerSelection === "scissor" && computerSelection === "rock"){
-        return "You Lose! Rock beats Scissor"; 
+    else if (playerSelection === "scissor" && computerSelection === "rock") {
+        return 1;
     }
-    else if(playerSelection === "scissor" && computerSelection === "paper"){
-        return "You Win! Scissor beats Paper"; 
+    else if (playerSelection === "scissor" && computerSelection === "paper") {
+        return 0;
     }
 }
 
-function game(){
-    let playerSelection = prompt("Rock, Paper or Scissor"); 
+function game() {
+    let countP = 0;
+    let countC=0;
+    for (let i = 1; i < 6; i++) {
+        let playerSelection = prompt("Rock, Paper or Scissor");
+        playerSelection = playerSelection.toLowerCase();
+        let computerSelection = getComputerChoice();
+
+        console.log(playerSelection);
+        console.log(computerSelection);
+
+        if (playRound(playerSelection, computerSelection) === 0) {
+            playerSelection = capitalize(playerSelection);
+            computerSelection = capitalize(computerSelection);
+            console.log(`Round ${i}: You Win! ${playerSelection} beats ${computerSelection}`);
+            countP++;
+        }
+
+        else if (playRound(playerSelection, computerSelection) === 1) {
+            playerSelection = capitalize(playerSelection);
+            computerSelection = capitalize(computerSelection);
+            console.log(`Round ${i}: You Lose! ${computerSelection} beats ${playerSelection}`);
+            countC++;
+        }
+
+        else{
+            playerSelection = capitalize(playerSelection);
+            computerSelection = capitalize(computerSelection);
+            console.log(`Round ${i}: Its a draw! You both threw ${playerSelection}`);
+        }
+    }
+
+    if(countP > countC){
+        console.log("You won more rounds, so you are the Winner. Congratulations!");
+    }
+    else if(countP < countC){
+        console.log("It seems the computer was lucky. Better luck next time!");
+    }
+
+    else{
+        console.log(`You and the computer both won ${countC} rounds, so this game ends in a draw. Kinda anticlimactic`);
+    }
+    
+
 }
 
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+ function capitalize(givenString){
+    return givenString.replace(givenString.charAt(0), (givenString.charAt(0)).toUpperCase() )
+ };
+
+game();
