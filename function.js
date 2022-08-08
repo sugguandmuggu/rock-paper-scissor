@@ -45,12 +45,15 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
+function game(playerSelect) 
+{
+    const result = document.querySelector('#result');
+
     let countP = 0;
     let countC=0;
-    for (let i = 1; i < 6; i++) {
-        let playerSelection = prompt("Rock, Paper or Scissor");
-        playerSelection = playerSelection.toLowerCase();
+    //for (let i = 1; i < 6; i++) {
+        //let playerSelection = prompt("Rock, Paper or Scissor");
+        let playerSelection = playerSelect.toLowerCase();
         let computerSelection = getComputerChoice();
 
         console.log(playerSelection);
@@ -59,25 +62,25 @@ function game() {
         if (playRound(playerSelection, computerSelection) === 0) {
             playerSelection = capitalize(playerSelection);
             computerSelection = capitalize(computerSelection);
-            console.log(`Round ${i}: You Win! ${playerSelection} beats ${computerSelection}`);
+            result.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
             countP++;
         }
 
         else if (playRound(playerSelection, computerSelection) === 1) {
             playerSelection = capitalize(playerSelection);
             computerSelection = capitalize(computerSelection);
-            console.log(`Round ${i}: You Lose! ${computerSelection} beats ${playerSelection}`);
+            result.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
             countC++;
         }
 
         else{
             playerSelection = capitalize(playerSelection);
             computerSelection = capitalize(computerSelection);
-            console.log(`Round ${i}: Its a draw! You both threw ${playerSelection}`);
+            result.textContent = `Its a draw! You both threw ${playerSelection}`;
         }
-    }
+}
 
-    if(countP > countC){
+    /*if(countP > countC){
         console.log("You won more rounds, so you are the Winner. Congratulations!");
     }
     else if(countP < countC){
@@ -86,13 +89,19 @@ function game() {
 
     else{
         console.log(`You and the computer both won ${countC} rounds, so this game ends in a draw. Kinda anticlimactic`);
-    }
+    }*/
     
 
-}
+
 
  function capitalize(givenString){
     return givenString.replace(givenString.charAt(0), (givenString.charAt(0)).toUpperCase() )
- };
+ }
 
-game();
+
+const choices=document.querySelectorAll('.button');
+choices.forEach((choice) => {
+    choice.addEventListener('click', () => {game(choice.id);});
+});
+
+

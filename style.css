@@ -1,0 +1,54 @@
+body{
+    margin: 0;
+    background-color: black;
+    color: white;
+}
+
+#main-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#title, #desc{
+    text-align: center;
+}
+
+#title{
+    font-size:100px;
+    margin-bottom: 0%;
+    margin-top: 0%;
+}
+
+#desc{
+    font-size: 60px;
+    width: 60%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#choices{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 64px;  
+}
+
+img{
+    width: 200px;
+    height: 200px;
+    margin-bottom: 50px;
+}
+
+
+
+#result{
+    width:100%;
+    font-size: 40px;
+    
+   
+    text-align: center;
+}
